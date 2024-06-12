@@ -1,2 +1,5 @@
-out:
-	cobc -O3 -x -o out first.cobol
+main: main.cobol
+	cobc -O3 -x -o out main.cobol
+
+clean:
+	rm out
