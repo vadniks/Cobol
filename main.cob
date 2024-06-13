@@ -1,18 +1,35 @@
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. AProgram.
+       PROGRAM-ID. Main.
 
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       SPECIAL-NAMES.
+           CLASS HexNumber IS "0" THRU "9" "a" THRU "f"
+           CLASS RealName IS "A" THRU "Z" "a" THRU "z" SPACE.
+       
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 Num1 PIC S99 VALUE 0.
-       01 Num2 PIC S99 VALUE 0.
-       01 Result PIC S999 VALUE ZEROS.
+       01 NumIn PIC X(4).
+       01 NameIn PIC X(15).
 
        PROCEDURE DIVISION.
        Begin.
-           DISPLAY "Enter a single digit number - " WITH NO ADVANCING
-           ACCEPT Num1
-           DISPLAY "Enter a single digit number - " WITH NO ADVANCING
-           ACCEPT Num2
-           MULTIPLY Num1 BY Num2 GIVING Result
-           DISPLAY "Result is " Result
+           DISPLAY "Enter a hex number - " WITH NO ADVANCING.
+           ACCEPT NumIn.
+
+           IF NumIn IS HexNumber THEN
+               DISPLAY NumIn " is a hex number"
+           ELSE
+               DISPLAY NumIn " is not a hex number"
+           END-IF.
+
+           DISPLAY "Enter a name: " WITH NO ADVANCING.
+           ACCEPT NameIn.
+
+           IF NameIn IS RealName THEN
+               DISPLAY NameIn " is a real name"
+           ELSE
+               DISPLAY NameIn " is not a real name"
+           END-IF.
+
            STOP RUN.
