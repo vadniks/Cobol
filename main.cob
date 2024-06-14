@@ -1,27 +1,33 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. Main.
 
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT TargetFile ASSIGN TO "data.txt"
+           ORGANIZATION IS SEQUENTIAL.
+       
        DATA DIVISION.
-       WORKING-STORAGE SECTION.
-       01  CountryCode PIC 999 VALUE ZEROS.
-           88 BritishCountry VALUES 3 7 10 15.
-       
-       01 CurrencyCode PIC 99 VALUE ZEROS.
-           88 CurrencyIsPound VALUE 14.
-           88 CurrencyIsEuro VALUE 03.
-           88 CurrencyIsDollar VALUE 28.
-       
+       FILE SECTION.
+       FD  TargetFile.
+       01  TargetDetails.
+           02 StudentId PIC X(4).
+           02 StudentName PIC X(5).
+           02 CourseCode PIC X(5).
+           88 EndOfFile VALUE HIGH-VALUES.
+
        PROCEDURE DIVISION.
        Begin.
-           DISPLAY "Enter the country code : " WITH NO ADVANCING.
-           ACCEPT CountryCode.
-
-           IF BritishCountry THEN
-               SET CurrencyIsPound TO TRUE
-           END-IF
-           IF CurrencyIsPound THEN
-               DISPLAY "Pound sterling used in this country"
-           ELSE
-               DISPLAY "Country does not use sterling"
-           END-IF
+           OPEN INPUT TargetFile
+           
+           READ TargetFile
+               AT END SET EndOfFile TO TRUE
+           END-READ
+           PERFORM UNTIL EndOfFIle
+               DISPLAY StudentId SPACE StudentName SPACE CourseCode
+               READ TargetFile
+                   AT END SET EndOfFile TO TRUE
+               END-READ
+           END-PERFORM
+           CLOSE TargetFile.
            STOP RUN.
