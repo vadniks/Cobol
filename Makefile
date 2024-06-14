@@ -1,5 +1,5 @@
 main: main.cob
-	@cobc -O3 -x -o out main.cob
+	@cobc --fixed -Wall -Warchaic -O3 -std=ibm -o out -x main.cob
 
 .PHONY: clean
 clean:
