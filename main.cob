@@ -1,5 +1,6 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. Main.
+      * Aka calculator
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
