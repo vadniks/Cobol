@@ -11,10 +11,10 @@
        FILE SECTION.
        FD  TargetFile.
        01  TargetDetails.
-           02 StudentId PIC X(4).
+           02 StudentId PIC X(5).
            02 StudentName PIC X(5).
-           02 CourseCode PIC X(5).
-           88 EndOfFile VALUE HIGH-VALUES.
+           02 CourseCode PIC X(6).
+           88 EndOfFile VALUE SPACES.
 
        PROCEDURE DIVISION.
        Begin.
