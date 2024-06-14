@@ -1,35 +1,27 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. Main.
 
-       ENVIRONMENT DIVISION.
-       CONFIGURATION SECTION.
-       SPECIAL-NAMES.
-           CLASS HexNumber IS "0" THRU "9" "a" THRU "f"
-           CLASS RealName IS "A" THRU "Z" "a" THRU "z" SPACE.
-       
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 NumIn PIC X(4).
-       01 NameIn PIC X(15).
-
+       01  CountryCode PIC 999 VALUE ZEROS.
+           88 BritishCountry VALUES 3 7 10 15.
+       
+       01 CurrencyCode PIC 99 VALUE ZEROS.
+           88 CurrencyIsPound VALUE 14.
+           88 CurrencyIsEuro VALUE 03.
+           88 CurrencyIsDollar VALUE 28.
+       
        PROCEDURE DIVISION.
        Begin.
-           DISPLAY "Enter a hex number - " WITH NO ADVANCING.
-           ACCEPT NumIn.
+           DISPLAY "Enter the country code : " WITH NO ADVANCING.
+           ACCEPT CountryCode.
 
-           IF NumIn IS HexNumber THEN
-               DISPLAY NumIn " is a hex number"
+           IF BritishCountry THEN
+               SET CurrencyIsPound TO TRUE
+           END-IF
+           IF CurrencyIsPound THEN
+               DISPLAY "Pound sterling used in this country"
            ELSE
-               DISPLAY NumIn " is not a hex number"
-           END-IF.
-
-           DISPLAY "Enter a name: " WITH NO ADVANCING.
-           ACCEPT NameIn.
-
-           IF NameIn IS RealName THEN
-               DISPLAY NameIn " is a real name"
-           ELSE
-               DISPLAY NameIn " is not a real name"
-           END-IF.
-
+               DISPLAY "Country does not use sterling"
+           END-IF
            STOP RUN.
