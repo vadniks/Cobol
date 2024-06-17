@@ -3,40 +3,22 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-       01 Num1 PIC 9 VALUE ZERO.
-       01 Num2 PIC 9 VALUE ZERO.
-       01 Result PIC 9.99 VALUE ZERO.
-       01 Operator PIC X VALUE SPACE.
-           88 ValidOperator VALUES "+" "-" "*" "/".
-           88 EndOfCalculations VALUE "q".
-       
+       01 UserName PIC X(20).
+       01 StartValue PIC 99 VALUE ZEROS.
+       01 Countdown PIC 99 VALUE ZEROS.
+
        PROCEDURE DIVISION.
        Begin.
-           PERFORM GetValidOperator UNTIL ValidOperator OR 
-                   EndOfCalculations
-           PERFORM UNTIL EndOfCalculations OR NOT ValidOperator
-               PERFORM GetTwoNumbers
-               EVALUATE Operator
-                   WHEN "+" ADD Num2 TO Num1 GIVING Result
-                   WHEN "-" SUBTRACT Num2 FROM Num1 GIVING Result
-                   WHEN "*" MULTIPLY Num1 BY Num2 GIVING Result
-                   WHEN "/" DIVIDE Num1 BY Num2 GIVING Result
-               END-EVALUATE
-               DISPLAY "Result: " Result
-               MOVE SPACE TO Operator
-               PERFORM GetValidOperator UNTIL EndOfCalculations OR 
-                       ValidOperator
-           END-PERFORM
-           DISPLAY "End of calculations"
-           STOP RUN.
-       
-       GetValidOperator.
-           DISPLAY "Enter an arithmetic operator (+ - * /) (q to end): "
-                   WITH NO ADVANCING
-           ACCEPT Operator.
+           DISPLAY "Enter your name: " WITH NO ADVANCING
+           ACCEPT UserName
 
-       GetTwoNumbers.
-           DISPLAY "Enter a single digit number - " WITH NO ADVANCING
-           ACCEPT Num1
-           DISPLAY "Enter a single digit number - " WITH NO ADVANCING
-           ACCEPT Num2.
+           DISPLAY "Enter the countdown start value: " WITH NO ADVANCING
+           ACCEPT StartValue
+
+           PERFORM VARYING Countdown FROM StartValue BY -1 UNTIL 
+                   Countdown = ZERO
+               DISPLAY Countdown
+           END-PERFORM
+
+           DISPLAY "Your name is: " UserName
+           STOP RUN.
